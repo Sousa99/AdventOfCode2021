@@ -6,7 +6,7 @@ use lib::{SystemBITS};
 fn main() {
 
     let lines = read::read_lines("input.txt".to_owned());
-    let system = SystemBITS::new(lines[0].clone());
+    let mut system = SystemBITS::new(lines[0].clone());
     
     //println!("{}", system);
 
@@ -17,4 +17,6 @@ fn main() {
     // Part 2
     let final_values = system.compute_values();
     println!("💻  The value of the packet is '{}' (Part 2)", final_values[0]);
+
+    //println!("{}", system);
 }

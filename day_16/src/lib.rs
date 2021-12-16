@@ -27,6 +27,8 @@ pub struct Packet {
     // Possibilities
     literal:        Option<u64>,
     sub_packets:    Option<Vec<Packet>>,
+    // For debug
+    value:          Option<u64>,
 }
 
 pub struct SystemBITS {
@@ -119,7 +121,8 @@ impl Packet {
                 for characther in info_chunk { remaining_info.push(characther) }
             } else {
                 let bit = info_chunk[0];
-                for characther in info_chunk { literal_binary.push(characther) }
+                let usable_info = info_chunk[1..].to_vec();
+                for characther in usable_info { literal_binary.push(characther) }
                 if bit == '0' { reached_zero = true; }
             }
             
@@ -207,6 +210,8 @@ impl Packet {
             // Possibilities
             literal: literal,
             sub_packets: sub_packets,
+            // For Debug
+            value: None,
         };
 
         return (new_packet, remaining_info);
@@ -224,11 +229,11 @@ impl Packet {
         return sum_value;
     }
 
-    fn compute_value(&self) -> u64 {
+    fn compute_value(&mut self) -> u64 {
 
         let mut sub_packets_values : Vec<u64> = Vec::new();
         if self.sub_packets.is_some() {
-            sub_packets_values = self.sub_packets.as_ref().unwrap().iter()
+            sub_packets_values = self.sub_packets.as_mut().unwrap().iter_mut()
                 .map(|packet| packet.compute_value())
                 .collect();
         }
@@ -245,6 +250,7 @@ impl Packet {
             PacketTypeEnum::EqualTo => if sub_packets_values[0] == sub_packets_values[1] { 1 } else { 0 },
         };
 
+        self.value = Some(final_value);
         return final_value;
 
     }
@@ -256,6 +262,9 @@ impl Packet {
 
         let mut line : String = format!("{}Version Id: {}", line_ident, self.version_id);
         line = format!("{}\n{}Packet Id: {} ({})", line, line_ident, self.packet_type.id, convert_packet_type_string(self.packet_type.packet_type_enum));
+
+        if self.value.is_some() { line = format!("{}\n{}Value Computed: {}", line, line_ident, self.value.unwrap()) }
+
         match self.packet_type.packet_type_enum {
             PacketTypeEnum::Literal => {
                 line = format!("{}\n{}Literal: {}", line, line_ident, self.literal.unwrap());
@@ -308,8 +317,8 @@ impl SystemBITS {
             .collect();
     }
 
-    pub fn compute_values(&self) -> Vec<ID> {
-        return self.packets.iter()
+    pub fn compute_values(&mut self) -> Vec<ID> {
+        return self.packets.iter_mut()
             .map(|packet| packet.compute_value())
             .collect();
     }
