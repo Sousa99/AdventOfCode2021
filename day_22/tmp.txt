@@ -1,0 +1,155 @@
+⚙️  Processing 1 out of 22 (4.55%)...⚙️  Processing 2 out of 22 (9.09%)...⚙️  Processing 3 out of 22 (13.64%)...⚙️  Processing 4 out of 22 (18.18%)...⚙️  Processing 5 out of 22 (22.73%)...⚙️  Processing 6 out of 22 (27.27%)...⚙️  Processing 7 out of 22 (31.82%)...⚙️  Processing 8 out of 22 (36.36%)...⚙️  Processing 9 out of 22 (40.91%)...⚙️  Processing 10 out of 22 (45.45%)...⚙️  Processing 11 out of 22 (50.00%)...⚙️  Processing 12 out of 22 (54.55%)...⚙️  Processing 13 out of 22 (59.09%)...⚙️  Processing 14 out of 22 (63.64%)...⚙️  Processing 15 out of 22 (68.18%)...⚙️  Processing 16 out of 22 (72.73%)...⚙️  Processing 17 out of 22 (77.27%)...⚙️  Processing 18 out of 22 (81.82%)...⚙️  Processing 19 out of 22 (86.36%)...⚙️  Processing 20 out of 22 (90.91%)...⚙️  Processing 21 out of 22 (95.45%)...⚙️  Processing 22 out of 22 (100.00%)...🧊  The number of turned 'on' cubes, in limited, was '590784' (Part 1)
+⚙️  Processing 1 out of 22 (4.55%)...⚙️  Processing 2 out of 22 (9.09%)...⚙️  Processing 3 out of 22 (13.64%)...⚙️  Processing 4 out of 22 (18.18%)...⚙️  Processing 5 out of 22 (22.73%)...⚙️  Processing 6 out of 22 (27.27%)...⚙️  Processing 7 out of 22 (31.82%)...⚙️  Processing 8 out of 22 (36.36%)...⚙️  Processing 9 out of 22 (40.91%)...⚙️  Processing 10 out of 22 (45.45%)...⚙️  Processing 11 out of 22 (50.00%)...⚙️  Processing 12 out of 22 (54.55%)...⚙️  Processing 13 out of 22 (59.09%)...⚙️  Processing 14 out of 22 (63.64%)...⚙️  Processing 15 out of 22 (68.18%)...⚙️  Processing 16 out of 22 (72.73%)...⚙️  Processing 17 out of 22 (77.27%)...⚙️  Processing 18 out of 22 (81.82%)...⚙️  Processing 19 out of 22 (86.36%)...⚙️  Processing 20 out of 22 (90.91%)...⚙️  Processing 21 out of 22 (95.45%)...⚙️  Processing 22 out of 22 (100.00%)...⚙️  Processing 'region' 1 out of 155 (0.65%)...(-22, -36, -47) => (17, 17, 7)
+⚙️  Processing 'region' 2 out of 155 (1.29%)...(18, -36, -47) => (26, -21, 7)
+⚙️  Processing 'region' 3 out of 155 (1.94%)...(18, -7, -47) => (26, 17, 7)
+⚙️  Processing 'region' 4 out of 155 (2.58%)...(18, -20, -47) => (26, -8, -4)
+⚙️  Processing 'region' 5 out of 155 (3.23%)...(-22, -27, -47) => (17, 17, 7)
+⚙️  Processing 'region' 6 out of 155 (3.87%)...(-31, -27, -47) => (17, 10, 7)
+⚙️  Processing 'region' 7 out of 155 (4.52%)...(-31, 11, -47) => (17, 17, -15)
+⚙️  Processing 'region' 8 out of 155 (5.16%)...(-31, 11, 4) => (17, 17, 7)
+⚙️  Processing 'region' 9 out of 155 (5.81%)...(-22, -36, -47) => (17, -28, 22)
+⚙️  Processing 'region' 10 out of 155 (6.45%)...(-31, -36, -47) => (17, 10, 22)
+⚙️  Processing 'region' 11 out of 155 (7.10%)...(-22, -21, -26) => (17, 23, 28)
+⚙️  Processing 'region' 12 out of 155 (7.74%)...(31, -21, -26) => (33, 23, 28)
+⚙️  Processing 'region' 13 out of 155 (8.39%)...(18, -21, -26) => (30, -21, 28)
+⚙️  Processing 'region' 14 out of 155 (9.03%)...(18, -7, -26) => (30, 23, 28)
+⚙️  Processing 'region' 15 out of 155 (9.68%)...(18, -20, -26) => (30, -8, -4)
+⚙️  Processing 'region' 16 out of 155 (10.32%)...(18, -20, 14) => (30, -8, 28)
+⚙️  Processing 'region' 17 out of 155 (10.97%)...(-22, -27, -26) => (17, 23, 28)
+⚙️  Processing 'region' 18 out of 155 (11.61%)...(-31, -27, -26) => (17, 10, 28)
+⚙️  Processing 'region' 19 out of 155 (12.26%)...(-31, 11, -26) => (17, 23, -15)
+⚙️  Processing 'region' 20 out of 155 (12.90%)...(-31, 11, 4) => (17, 23, 28)
+⚙️  Processing 'region' 21 out of 155 (13.55%)...(-22, -29, -38) => (17, 23, 16)
+⚙️  Processing 'region' 22 out of 155 (14.19%)...(18, -29, -38) => (28, -21, 16)
+⚙️  Processing 'region' 23 out of 155 (14.84%)...(18, -7, -38) => (28, 23, 16)
+⚙️  Processing 'region' 24 out of 155 (15.48%)...(18, -20, -38) => (28, -8, -4)
+⚙️  Processing 'region' 25 out of 155 (16.13%)...(18, -20, 14) => (28, -8, 16)
+⚙️  Processing 'region' 26 out of 155 (16.77%)...(-22, -27, -38) => (17, 23, 16)
+⚙️  Processing 'region' 27 out of 155 (17.42%)...(-31, -27, -38) => (17, 10, 16)
+⚙️  Processing 'region' 28 out of 155 (18.06%)...(-31, 11, -38) => (17, 23, -15)
+⚙️  Processing 'region' 29 out of 155 (18.71%)...(-31, 11, 4) => (17, 23, 16)
+⚙️  Processing 'region' 30 out of 155 (19.35%)...(-22, -29, -38) => (17, -28, 22)
+⚙️  Processing 'region' 31 out of 155 (20.00%)...(-31, -29, -38) => (17, 10, 22)
+⚙️  Processing 'region' 32 out of 155 (20.65%)...(-22, -6, -50) => (17, 46, -1)
+⚙️  Processing 'region' 33 out of 155 (21.29%)...(-22, -27, -50) => (17, 46, -1)
+⚙️  Processing 'region' 34 out of 155 (21.94%)...(-31, -27, -50) => (17, 10, -1)
+⚙️  Processing 'region' 35 out of 155 (22.58%)...(-31, 31, -50) => (17, 46, -1)
+⚙️  Processing 'region' 36 out of 155 (23.23%)...(-31, 11, -50) => (17, 30, -15)
+⚙️  Processing 'region' 37 out of 155 (23.87%)...(-46, -15, -50) => (17, 25, -1)
+⚙️  Processing 'region' 38 out of 155 (24.52%)...(-40, -27, -50) => (17, 25, -1)
+⚙️  Processing 'region' 39 out of 155 (25.16%)...(-32, -27, -50) => (17, 10, -1)
+⚙️  Processing 'region' 40 out of 155 (25.81%)...(-32, 11, -50) => (17, 25, -15)
+⚙️  Processing 'region' 41 out of 155 (26.45%)...(-46, -15, -50) => (17, 46, -1)
+⚙️  Processing 'region' 42 out of 155 (27.10%)...(-40, -27, -50) => (17, 46, -1)
+⚙️  Processing 'region' 43 out of 155 (27.74%)...(-32, -27, -50) => (17, 10, -1)
+⚙️  Processing 'region' 44 out of 155 (28.39%)...(-32, 31, -50) => (17, 46, -1)
+⚙️  Processing 'region' 45 out of 155 (29.03%)...(-32, 11, -50) => (17, 30, -15)
+⚙️  Processing 'region' 46 out of 155 (29.68%)...(-46, -15, -50) => (17, 41, -48)
+⚙️  Processing 'region' 47 out of 155 (30.32%)...(-40, -27, -50) => (17, 41, -48)
+⚙️  Processing 'region' 48 out of 155 (30.97%)...(-32, -27, -50) => (17, 10, -48)
+⚙️  Processing 'region' 49 out of 155 (31.61%)...(-32, 31, -50) => (17, 41, -48)
+⚙️  Processing 'region' 50 out of 155 (32.26%)...(-32, 11, -50) => (17, 30, -15)
+⚙️  Processing 'region' 51 out of 155 (32.90%)...(-46, -15, -36) => (17, 41, -1)
+⚙️  Processing 'region' 52 out of 155 (33.55%)...(-40, -27, -36) => (17, 41, -1)
+⚙️  Processing 'region' 53 out of 155 (34.19%)...(-32, -27, -36) => (17, 10, -1)
+⚙️  Processing 'region' 54 out of 155 (34.84%)...(-32, 31, -36) => (17, 41, -1)
+⚙️  Processing 'region' 55 out of 155 (35.48%)...(-32, 11, -36) => (17, 30, -15)
+⚙️  Processing 'region' 56 out of 155 (36.13%)...(-49, -3, -24) => (17, 46, 28)
+⚙️  Processing 'region' 57 out of 155 (36.77%)...(-22, -3, -24) => (17, 46, 28)
+⚙️  Processing 'region' 58 out of 155 (37.42%)...(-22, -27, -24) => (17, 46, 28)
+⚙️  Processing 'region' 59 out of 155 (38.06%)...(-31, -27, -24) => (17, 10, 28)
+⚙️  Processing 'region' 60 out of 155 (38.71%)...(-31, 31, -24) => (17, 46, 28)
+⚙️  Processing 'region' 61 out of 155 (39.35%)...(-31, 11, -24) => (17, 30, -15)
+⚙️  Processing 'region' 62 out of 155 (40.00%)...(-31, 11, 4) => (17, 30, 28)
+⚙️  Processing 'region' 63 out of 155 (40.65%)...(-48, -15, -24) => (17, 25, 28)
+⚙️  Processing 'region' 64 out of 155 (41.29%)...(-40, -27, -24) => (17, 25, 28)
+⚙️  Processing 'region' 65 out of 155 (41.94%)...(-32, -27, -24) => (17, 10, 28)
+⚙️  Processing 'region' 66 out of 155 (42.58%)...(-32, 11, -24) => (17, 25, -15)
+⚙️  Processing 'region' 67 out of 155 (43.23%)...(-32, 11, 4) => (17, 25, 28)
+⚙️  Processing 'region' 68 out of 155 (43.87%)...(-48, -15, -24) => (17, 46, 28)
+⚙️  Processing 'region' 69 out of 155 (44.52%)...(-40, -27, -24) => (17, 46, 28)
+⚙️  Processing 'region' 70 out of 155 (45.16%)...(-32, -27, -24) => (17, 10, 28)
+⚙️  Processing 'region' 71 out of 155 (45.81%)...(-32, 31, -24) => (17, 46, 28)
+⚙️  Processing 'region' 72 out of 155 (46.45%)...(-32, 11, -24) => (17, 30, -15)
+⚙️  Processing 'region' 73 out of 155 (47.10%)...(-32, 11, 4) => (17, 30, 28)
+⚙️  Processing 'region' 74 out of 155 (47.74%)...(-48, -15, -36) => (17, 41, 28)
+⚙️  Processing 'region' 75 out of 155 (48.39%)...(-40, -27, -36) => (17, 41, 28)
+⚙️  Processing 'region' 76 out of 155 (49.03%)...(-32, -27, -36) => (17, 10, 28)
+⚙️  Processing 'region' 77 out of 155 (49.68%)...(-32, 31, -36) => (17, 41, 28)
+⚙️  Processing 'region' 78 out of 155 (50.32%)...(-32, 11, -36) => (17, 30, -15)
+⚙️  Processing 'region' 79 out of 155 (50.97%)...(-32, 11, 4) => (17, 30, 28)
+⚙️  Processing 'region' 80 out of 155 (51.61%)...(-22, -22, -23) => (17, 22, 27)
+⚙️  Processing 'region' 81 out of 155 (52.26%)...(31, -22, -23) => (47, 22, 27)
+⚙️  Processing 'region' 82 out of 155 (52.90%)...(18, -22, -23) => (30, -21, 27)
+⚙️  Processing 'region' 83 out of 155 (53.55%)...(18, -7, -23) => (30, 22, 27)
+⚙️  Processing 'region' 84 out of 155 (54.19%)...(18, -20, -23) => (30, -8, -4)
+⚙️  Processing 'region' 85 out of 155 (54.84%)...(18, -20, 14) => (30, -8, 27)
+⚙️  Processing 'region' 86 out of 155 (55.48%)...(-22, -27, -23) => (17, 22, 27)
+⚙️  Processing 'region' 87 out of 155 (56.13%)...(-31, -27, -23) => (17, 10, 27)
+⚙️  Processing 'region' 88 out of 155 (56.77%)...(-31, 11, -23) => (17, 22, -15)
+⚙️  Processing 'region' 89 out of 155 (57.42%)...(-31, 11, 4) => (17, 22, 27)
+⚙️  Processing 'region' 90 out of 155 (58.06%)...(-22, -28, -21) => (17, 26, 29)
+⚙️  Processing 'region' 91 out of 155 (58.71%)...(18, -28, -21) => (23, -21, 29)
+⚙️  Processing 'region' 92 out of 155 (59.35%)...(18, -7, -21) => (23, 26, 29)
+⚙️  Processing 'region' 93 out of 155 (60.00%)...(18, -20, -21) => (23, -8, -4)
+⚙️  Processing 'region' 94 out of 155 (60.65%)...(18, -20, 14) => (23, -8, 29)
+⚙️  Processing 'region' 95 out of 155 (61.29%)...(-22, -27, -21) => (17, 26, 29)
+⚙️  Processing 'region' 96 out of 155 (61.94%)...(-31, -27, -21) => (17, 10, 29)
+⚙️  Processing 'region' 97 out of 155 (62.58%)...(-31, 11, -21) => (17, 26, -15)
+⚙️  Processing 'region' 98 out of 155 (63.23%)...(-31, 11, 4) => (17, 26, 29)
+⚙️  Processing 'region' 99 out of 155 (63.87%)...(-22, -28, -21) => (17, -28, 22)
+⚙️  Processing 'region' 100 out of 155 (64.52%)...(-31, -28, -21) => (17, 10, 22)
+⚙️  Processing 'region' 101 out of 155 (65.16%)...(-22, -6, -3) => (17, 47, 44)
+⚙️  Processing 'region' 102 out of 155 (65.81%)...(-22, -27, -3) => (17, 47, 44)
+⚙️  Processing 'region' 103 out of 155 (66.45%)...(-31, -27, -3) => (17, 10, 44)
+⚙️  Processing 'region' 104 out of 155 (67.10%)...(-31, 31, -3) => (17, 47, 44)
+⚙️  Processing 'region' 105 out of 155 (67.74%)...(-31, 11, 4) => (17, 30, 44)
+⚙️  Processing 'region' 106 out of 155 (68.39%)...(-39, -27, -3) => (17, 25, 44)
+⚙️  Processing 'region' 107 out of 155 (69.03%)...(-32, -27, -3) => (17, 10, 44)
+⚙️  Processing 'region' 108 out of 155 (69.68%)...(-32, 11, 4) => (17, 25, 44)
+⚙️  Processing 'region' 109 out of 155 (70.32%)...(-39, -27, -3) => (17, 47, 44)
+⚙️  Processing 'region' 110 out of 155 (70.97%)...(-32, -27, -3) => (17, 10, 44)
+⚙️  Processing 'region' 111 out of 155 (71.61%)...(-32, 31, -3) => (17, 47, 44)
+⚙️  Processing 'region' 112 out of 155 (72.26%)...(-32, 11, 4) => (17, 30, 44)
+⚙️  Processing 'region' 113 out of 155 (72.90%)...(-39, -27, -36) => (17, 41, 44)
+⚙️  Processing 'region' 114 out of 155 (73.55%)...(-32, -27, -36) => (17, 10, 44)
+⚙️  Processing 'region' 115 out of 155 (74.19%)...(-32, 31, -36) => (17, 41, 44)
+⚙️  Processing 'region' 116 out of 155 (74.84%)...(-32, 11, -36) => (17, 30, -15)
+⚙️  Processing 'region' 117 out of 155 (75.48%)...(-32, 11, 4) => (17, 30, 44)
+⚙️  Processing 'region' 118 out of 155 (76.13%)...(-22, -8, -13) => (17, 43, 34)
+⚙️  Processing 'region' 119 out of 155 (76.77%)...(18, -7, -13) => (21, 43, 34)
+⚙️  Processing 'region' 120 out of 155 (77.42%)...(18, -8, -13) => (21, -8, -4)
+⚙️  Processing 'region' 121 out of 155 (78.06%)...(18, -8, 14) => (21, -8, 34)
+⚙️  Processing 'region' 122 out of 155 (78.71%)...(-22, -27, -13) => (17, 43, 34)
+⚙️  Processing 'region' 123 out of 155 (79.35%)...(-31, -27, -13) => (17, 10, 34)
+⚙️  Processing 'region' 124 out of 155 (80.00%)...(-31, 31, -13) => (17, 43, 34)
+⚙️  Processing 'region' 125 out of 155 (80.65%)...(-31, 11, 4) => (17, 30, 34)
+⚙️  Processing 'region' 126 out of 155 (81.29%)...(-22, -27, -29) => (17, 20, 19)
+⚙️  Processing 'region' 127 out of 155 (81.94%)...(18, -27, -29) => (26, -21, 19)
+⚙️  Processing 'region' 128 out of 155 (82.58%)...(18, -7, -29) => (26, 20, 19)
+⚙️  Processing 'region' 129 out of 155 (83.23%)...(18, -20, -29) => (26, -8, -4)
+⚙️  Processing 'region' 130 out of 155 (83.87%)...(18, -20, 14) => (26, -8, 19)
+⚙️  Processing 'region' 131 out of 155 (84.52%)...(-22, -27, -29) => (17, 20, 19)
+⚙️  Processing 'region' 132 out of 155 (85.16%)...(-31, -27, -29) => (17, 10, 19)
+⚙️  Processing 'region' 133 out of 155 (85.81%)...(-31, 11, -29) => (17, 20, -15)
+⚙️  Processing 'region' 134 out of 155 (86.45%)...(-31, 11, 4) => (17, 20, 19)
+⚙️  Processing 'region' 135 out of 155 (87.10%)...(-22, 6, -50) => (17, 50, -2)
+⚙️  Processing 'region' 136 out of 155 (87.74%)...(31, 6, -50) => (35, 50, -2)
+⚙️  Processing 'region' 137 out of 155 (88.39%)...(18, -7, -50) => (30, 50, -2)
+⚙️  Processing 'region' 138 out of 155 (89.03%)...(-22, -27, -50) => (17, 50, -2)
+⚙️  Processing 'region' 139 out of 155 (89.68%)...(-31, -27, -50) => (17, 10, -2)
+⚙️  Processing 'region' 140 out of 155 (90.32%)...(-31, 31, -50) => (17, 50, -2)
+⚙️  Processing 'region' 141 out of 155 (90.97%)...(-31, 11, -50) => (17, 30, -15)
+⚙️  Processing 'region' 142 out of 155 (91.61%)...(-22, -33, -7) => (17, 15, 46)
+⚙️  Processing 'region' 143 out of 155 (92.26%)...(18, -33, -7) => (26, -21, 46)
+⚙️  Processing 'region' 144 out of 155 (92.90%)...(18, -7, -7) => (26, 15, 46)
+⚙️  Processing 'region' 145 out of 155 (93.55%)...(18, -20, -7) => (26, -8, -4)
+⚙️  Processing 'region' 146 out of 155 (94.19%)...(18, -20, 14) => (26, -8, 46)
+⚙️  Processing 'region' 147 out of 155 (94.84%)...(-22, -41, -47) => (17, 10, 6)
+⚙️  Processing 'region' 148 out of 155 (95.48%)...(31, -41, -47) => (35, 10, 6)
+⚙️  Processing 'region' 149 out of 155 (96.13%)...(18, -41, -47) => (30, -21, 6)
+⚙️  Processing 'region' 150 out of 155 (96.77%)...(18, -7, -47) => (30, 10, 6)
+⚙️  Processing 'region' 151 out of 155 (97.42%)...(18, -20, -47) => (30, -8, -4)
+⚙️  Processing 'region' 152 out of 155 (98.06%)...(-49, -3, -29) => (17, 45, 18)
+⚙️  Processing 'region' 153 out of 155 (98.71%)...(-41, -7, -33) => (9, 43, 15)
+⚙️  Processing 'region' 154 out of 155 (99.35%)...(-54112, -85059, -27449) => (-39298, -49293, 7877)
