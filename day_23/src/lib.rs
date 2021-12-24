@@ -1,19 +1,21 @@
 use std::hash::Hash;
-use std::collections::{HashMap, HashSet};
+use std::cmp::Ordering;
+use std::collections::{HashMap, HashSet, BinaryHeap};
 
 // ================================================== STRUCTS ==================================================
 
 type PositionUnit = i32;
 type Position = (PositionUnit, PositionUnit);
 
-#[derive(PartialEq, Copy, Clone)]
+#[derive(Copy, Clone, PartialEq, Eq)]
 enum AmphipodType { Amber, Bronze, Copper, Desert }
 
-#[derive(Clone)]
+#[derive(Clone, PartialEq, Eq)]
 struct Amphipod {
     amphipod_type:  AmphipodType,
     position:       Position,
     moved_outside:  bool,
+    number_moves:   usize,
 }
 
 #[derive(PartialEq, Copy, Clone)]
@@ -25,23 +27,24 @@ enum RoomType { AmberRoom, BronzeRoom, CopperRoom, DesertRoom }
 #[derive(Clone)]
 struct Room {
     room_type:  RoomType,
-    positions:  Vec<Position>,
+    positions:  HashSet<Position>,
 }
 
 type Energy = i64;
 
-#[derive(Clone)]
-struct Scenario {
+#[derive(Clone, Eq)]
+struct Node {
     energy_consumed:    Energy,
-    rooms:              Vec<Room>,
     amphipods:          Vec<Amphipod>,
 }
 
 pub struct Map {
     map_size:           (Position, Position),
     map_positions:      HashMap<Position, PositionType>,
-    starting_scenario:  Scenario,
-    final_scenario:     Option<Scenario>,
+    rooms:              HashMap<Position, Room>,
+    // Node Graph
+    starting_node:      Node,
+    final_node:         Option<Node>,
 }
 
 // ================================================== AUXILIARY FUNCTIONS ==================================================
@@ -88,9 +91,10 @@ impl Amphipod {
 
     pub fn new(amphipod_type: AmphipodType, position: Position) -> Amphipod {
         Amphipod {
-            amphipod_type: amphipod_type,
-            position: position,
-            moved_outside: false,
+            amphipod_type:  amphipod_type,
+            position:       position,
+            moved_outside:  false,
+            number_moves:   0,
         }
     }
 
@@ -102,11 +106,16 @@ impl Amphipod {
             AmphipodType::Desert => 1000, 
         }
     }
+
+    fn get_code(&self) -> String {
+        let characther : char = convert_amphipod_type_to_characther(&self.amphipod_type);
+        return format!("{}:({},{}),{}", characther, self.position.0, self.position.1, self.moved_outside);
+    }
 }
 
 impl Room {
 
-    pub fn new(room_type: RoomType, positions: Vec<Position>) -> Room {
+    pub fn new(room_type: RoomType, positions: HashSet<Position>) -> Room {
         Room {
             room_type: room_type,
             positions: positions,
@@ -114,12 +123,11 @@ impl Room {
     }
 }
 
-impl Scenario {
+impl Node {
 
-    pub fn new(rooms: Vec<Room>, amphipods: Vec<Amphipod>) -> Scenario {
-        Scenario {
+    pub fn new(amphipods: Vec<Amphipod>) -> Node {
+        Node {
             energy_consumed: 0,
-            rooms: rooms,
             amphipods: amphipods,
         }
     }
@@ -148,16 +156,14 @@ impl Scenario {
         return amphipod_option;
     }
 
-    fn get_room_in_position(&self, position: &Position) -> Option<&Room> {
+    fn get_code(&self) -> String {
 
-        let mut room_option : Option<&Room> = None;
-        for room in self.rooms.iter() {
-            if room.positions.contains(position) {
-                room_option = Some(room);
-            }
-        }
+        let mut amphipod_codes : Vec<String> = self.amphipods.iter()
+            .map(|amphipod| amphipod.get_code())
+            .collect();
+        amphipod_codes.sort();
 
-        return room_option;
+        return format!("{}:({})", self.energy_consumed, amphipod_codes.join("|"));
     }
 
     fn room_ready_to_receive_amphypod(&self, room: &Room, amphipod: &Amphipod) -> bool {
@@ -192,6 +198,8 @@ impl Scenario {
 
     fn transversable(&self, position_map: &HashMap<Position, PositionType>, position: Position, amphipod: &Amphipod) -> bool {
 
+        if amphipod.number_moves >= 2 { return false }
+
         let position_type = position_map.get(&position);
         let amphipod_in_position = self.get_amphipod_in_position(&position);
 
@@ -210,11 +218,14 @@ impl Scenario {
         panic!("🚨  I think it should never reach this position");
     }
 
-    fn movable_position(&self, position_map: &HashMap<Position, PositionType>, position: Position, amphipod: &Amphipod) -> bool {
+    fn movable_position(&self, position_map: &HashMap<Position, PositionType>, rooms: &HashMap<Position, Room>, position: Position, amphipod: &Amphipod) -> bool {
 
         let position_type = position_map.get(&position);
-        let room = self.get_room_in_position(&position);
+        let room = rooms.get(&position);
         let amphipod_in_position = self.get_amphipod_in_position(&position);
+
+        // Efficiency
+        let position_type_under = position_map.get(&(position.0, position.1 - 1));
 
         // If not in map not valid
         if position_type.is_none() { return false }
@@ -225,6 +236,9 @@ impl Scenario {
         // Cannot move to a place where there is another amphipod
         if amphipod_in_position.is_some() { return false }
         
+        // Efficiency, do not block rooms
+        if *position_type == PositionType::Hallway && position_type_under.is_some()
+            && *position_type_under.unwrap() == PositionType::Room { return false }
         // Cannot move to free spot if already moved to one before
         if *position_type == PositionType::Hallway && amphipod.moved_outside { return false }
         if *position_type == PositionType::Hallway && !amphipod.moved_outside { return true }
@@ -240,7 +254,7 @@ impl Scenario {
         panic!("🚨  I think it should never reach this position");
     }
 
-    fn get_movable_positions(&self, position_map: &HashMap<Position, PositionType>, amphipod: &Amphipod) -> Vec<(usize, Position)> {
+    fn get_movable_positions(&self, position_map: &HashMap<Position, PositionType>, rooms: &HashMap<Position, Room>, amphipod: &Amphipod) -> Vec<(usize, Position)> {
 
         type Path = Vec<Position>;
 
@@ -268,7 +282,7 @@ impl Scenario {
                     active_paths.push(new_expanded_path.clone());
 
 
-                    let movable_to_position = self.movable_position(position_map, new_position, amphipod);
+                    let movable_to_position = self.movable_position(position_map, rooms, new_position, amphipod);
                     if movable_to_position { valid_paths.push(new_expanded_path) }
                 }
             }
@@ -281,11 +295,11 @@ impl Scenario {
             .collect();
     }
 
-    fn scenario_finished(&self) -> bool {
+    fn finishing_node(&self, rooms: &HashMap<Position, Room>) -> bool {
 
         for amphipod in self.amphipods.iter() {
 
-            let room = self.get_room_in_position(&amphipod.position);
+            let room = rooms.get(&amphipod.position);
             if room.is_none() { return false }
             let room = room.unwrap();
 
@@ -301,28 +315,50 @@ impl Scenario {
         return true;
     }
 
-    fn create_scenarios_variation(&self, position_map: &HashMap<Position, PositionType>) -> Vec<Scenario> {
+    fn create_generated_nodes(&self, position_map: &HashMap<Position, PositionType>, rooms: &HashMap<Position, Room>) -> Vec<Node> {
 
-        let mut new_scenarios : Vec<Scenario> = Vec::new();
+        let mut new_nodes : Vec<Node> = Vec::new();
         for amphipod in self.amphipods.iter() {
 
             let amphipod_cost = amphipod.get_movement_cost();
-            let movement_possibilities = self.get_movable_positions(position_map, amphipod);
+            let movement_possibilities = self.get_movable_positions(position_map, rooms, amphipod);
             for movement_possibility in movement_possibilities.iter() {
 
-                let mut new_scenario = self.clone();
+                let mut new_node = self.clone();
                 let position_type = position_map.get(&movement_possibility.1).unwrap();
 
-                new_scenario.energy_consumed += amphipod_cost * movement_possibility.0 as Energy;
-                let mut corresponding_amphipod = new_scenario.get_mut_amphipod_in_position(&amphipod.position).unwrap();
+                let added_energy = amphipod_cost * movement_possibility.0 as Energy;
+                new_node.energy_consumed += added_energy;
+
+                let mut corresponding_amphipod = new_node.get_mut_amphipod_in_position(&amphipod.position).unwrap();
                 corresponding_amphipod.position = movement_possibility.1;
+                corresponding_amphipod.number_moves += 1;
+
                 if *position_type == PositionType::Hallway { corresponding_amphipod.moved_outside = true; }
 
-                new_scenarios.push(new_scenario);
+                new_nodes.push(new_node);
             }
         }
 
-        return new_scenarios;
+        return new_nodes;
+    }
+}
+
+impl Ord for Node {
+    fn cmp(&self, other: &Self) -> Ordering {
+        self.energy_consumed.cmp(&other.energy_consumed).reverse()
+    }
+}
+
+impl PartialOrd for Node {
+    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl PartialEq for Node {
+    fn eq(&self, other: &Self) -> bool {
+        self.energy_consumed == other.energy_consumed
     }
 }
 
@@ -373,49 +409,53 @@ impl Map {
             }
         }
 
-        let rooms : Vec<Room> = room_info.into_iter()
-            .map(|(room_type, positions)| Room::new(room_type, positions.into_iter()
-                .collect::<Vec<Position>>()))
-            .collect();
+        let mut rooms : HashMap<Position, Room> = HashMap::new();
+        for (room_type, positions) in room_info.into_iter() {
+            let new_room : Room = Room::new(room_type, positions);
+            for &position in new_room.positions.iter() {
+                rooms.insert(position, new_room.clone());
+            }
+        }
 
         Map {
             map_size:           ((0, 0), map_limit),
             map_positions:      map_positions,
-            starting_scenario:  Scenario::new(rooms, amphipods),
-            final_scenario:     None,
+            rooms:              rooms,
+            starting_node:      Node::new(amphipods),
+            final_node:         None,
         }
     }
 
-    pub fn reach_final_scenario(&mut self) {
+    pub fn reach_final_node(&mut self) {
 
-        let mut active_scenarios : Vec<Scenario> = vec!(self.starting_scenario.clone());
-        while active_scenarios.len() != 0 {
+        let mut active_nodes : BinaryHeap<Node> = BinaryHeap::new();
+        active_nodes.push(self.starting_node.clone());
+        while active_nodes.len() != 0 {
 
-            let current_scenario = active_scenarios.pop().unwrap();
+            let current_scenario = active_nodes.pop().unwrap();
             print!("\r⚙️  Processing {} active scenarios ( minimum = {} ) ...", 
-                active_scenarios.len(), current_scenario.energy_consumed);
+                active_nodes.len(), current_scenario.energy_consumed);
 
-            //if self.final_scenario.is_some() && self.final_scenario.as_ref().unwrap().energy_consumed < current_scenario.energy_consumed { break }
-
-            let mut generated_scenarios = current_scenario.create_scenarios_variation(&self.map_positions);
-            //println!("Generated Scenarios: {}", generated_scenarios.len());
-            for generated_scenario in generated_scenarios.iter() {
-                if generated_scenario.scenario_finished() && (
-                    self.final_scenario.is_none() || self.final_scenario.as_ref().unwrap().energy_consumed > generated_scenario.energy_consumed
-                ) { self.final_scenario = Some(generated_scenario.clone()); }
-
-                self.print(generated_scenario);
+            if self.final_node.is_some() && self.final_node.as_ref().unwrap().energy_consumed < current_scenario.energy_consumed { break }
+            
+            let nodes = current_scenario.create_generated_nodes(&self.map_positions, &self.rooms);
+            for generated_node in nodes.into_iter() {
+                if generated_node.finishing_node(&self.rooms) && (
+                    self.final_node.is_none() || self.final_node.as_ref().unwrap().energy_consumed > generated_node.energy_consumed
+                ) { self.final_node = Some(generated_node.clone()); }
+                
+                let code_of_generated = generated_node.get_code();
+                
+                //self.print(&generated_node);
+                //println!("{}", code_of_generated);
+                active_nodes.push(generated_node);
             }
-
-            active_scenarios.append(&mut generated_scenarios);
-            //active_scenarios.sort_by_key(|scenario| scenario.energy_consumed);
-            //active_scenarios.reverse();
         }
     }
 
-    pub fn get_energy_of_final_scenario(&self) -> Energy { self.final_scenario.as_ref().unwrap().energy_consumed }
+    pub fn get_energy_of_final_node(&self) -> Energy { self.final_node.as_ref().unwrap().energy_consumed }
 
-    fn print(&self, scenario: &Scenario) {
+    fn print(&self, node: &Node) {
 
         let mut print_info : String = String::new();
         for y_value in self.map_size.0.1..=self.map_size.1.1 {
@@ -423,14 +463,14 @@ impl Map {
 
                 let position = (x_value as PositionUnit, y_value as PositionUnit);
 
-                let amphipod = scenario.get_amphipod_in_position(&position);
+                let amphipod = node.get_amphipod_in_position(&position);
                 let position_type = self.map_positions.get(&position);
 
                 if amphipod.is_some() {
                     let amphipod_characther = convert_amphipod_type_to_characther(&amphipod.unwrap().amphipod_type);
                     print_info = format!("{}{}", print_info, amphipod_characther);
                 } else if position_type.is_some() && *position_type.unwrap() == PositionType::Room {
-                    let room_type = scenario.get_room_in_position(&position).unwrap();
+                    let room_type = self.rooms.get(&position).unwrap();
                     let room_type_characther = convert_room_type_to_characther(&room_type.room_type);
                     print_info = format!("{}{}", print_info, room_type_characther);
                 } else if position_type.is_some() {
