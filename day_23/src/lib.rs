@@ -196,6 +196,29 @@ impl Node {
         return true;
     }
 
+    fn lowest_free_position_in_room(&self, room: &Room, position: &Position) -> bool {
+
+        let amphipod_positions : Vec<Position> = self.amphipods.iter()
+            .map(|amphipod| amphipod.position)
+            .collect();
+
+        let free_positions : Vec<&Position> = room.positions.iter()
+            .filter(|position| !amphipod_positions.contains(position))
+            .collect();
+
+        let mut lowest_y : Option<Position> = None;
+        for &free_position in free_positions.into_iter() {
+            if lowest_y.is_none() || free_position.1 > lowest_y.as_ref().unwrap().1 {
+                lowest_y = Some(free_position);
+            }
+        }
+
+        if lowest_y.is_none() { return false }
+        let lowest_y = lowest_y.unwrap();
+
+        return lowest_y == *position;
+    }
+
     fn transversable(&self, position_map: &HashMap<Position, PositionType>, position: Position, amphipod: &Amphipod) -> bool {
 
         if amphipod.number_moves >= 2 { return false }
@@ -225,7 +248,7 @@ impl Node {
         let amphipod_in_position = self.get_amphipod_in_position(&position);
 
         // Efficiency
-        let position_type_under = position_map.get(&(position.0, position.1 - 1));
+        let position_type_under = position_map.get(&(position.0, position.1 + 1));
 
         // If not in map not valid
         if position_type.is_none() { return false }
@@ -246,8 +269,9 @@ impl Node {
         if *position_type == PositionType::Room {
 
             let room = room.unwrap();
-            if self.room_ready_to_receive_amphypod(room, amphipod) { return true }
-            else { return false }
+            if self.room_ready_to_receive_amphypod(room, amphipod) && self.lowest_free_position_in_room(room, &position) {
+                return true
+            } else { return false }
 
         }
 
@@ -428,17 +452,23 @@ impl Map {
 
     pub fn reach_final_node(&mut self) {
 
+        let mut visited : HashSet<String> = HashSet::new();
+
         let mut active_nodes : BinaryHeap<Node> = BinaryHeap::new();
         active_nodes.push(self.starting_node.clone());
         while active_nodes.len() != 0 {
 
-            let current_scenario = active_nodes.pop().unwrap();
-            print!("\r⚙️  Processing {} active scenarios ( minimum = {} ) ...", 
-                active_nodes.len(), current_scenario.energy_consumed);
+            let current_node = active_nodes.pop().unwrap();
+            print!("\r⚙️  Processing {} active scenarios ( min = {} ) ...", 
+                active_nodes.len(), current_node.energy_consumed);
 
-            if self.final_node.is_some() && self.final_node.as_ref().unwrap().energy_consumed < current_scenario.energy_consumed { break }
+            if visited.contains(&current_node.get_code()) { continue }
+            visited.insert(current_node.get_code());
+            //self.print(&current_node);
+
+            if self.final_node.is_some() && self.final_node.as_ref().unwrap().energy_consumed < current_node.energy_consumed { break }
             
-            let nodes = current_scenario.create_generated_nodes(&self.map_positions, &self.rooms);
+            let nodes = current_node.create_generated_nodes(&self.map_positions, &self.rooms);
             for generated_node in nodes.into_iter() {
                 if generated_node.finishing_node(&self.rooms) && (
                     self.final_node.is_none() || self.final_node.as_ref().unwrap().energy_consumed > generated_node.energy_consumed
